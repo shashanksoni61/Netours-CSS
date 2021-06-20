@@ -1,3 +1,3 @@
 # Netours-CSS
 
-create while learning SCSS
+created while learning SCSS
