@@ -1,0 +1,88 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%; // 1rem = 16px so 10px/16 62.5%
+  // @include respond(phone) {
+  //   font-size: 50%;
+  // }
+
+  /*
+Herethe phone, this media query
+
+asks the question if the width is smaller than 600,
+But this next media query of tab-port here asks the question
+
+if the width is lower than 900.
+
+Imagine that the width of phone is 500,
+
+and so it will still be less than 900, right?
+
+500 is still less than 600, but of course,
+
+also less than 900, so both of these
+
+media queries would apply, and what that means
+
+is that I don't really need this phone query, right?
+
+If I have 50% in this one (phone)  and in this one (tab-port),
+
+if they're the same, I don't need this one (phone )
+
+because they will both apply, so one of them is unnecessary.
+
+Let's simply remove or comment the first one (phone),
+
+and that should now work as intended.
+
+
+
+*/
+
+  //@media (max-width: 600px) {
+  // (max-width:600px)
+  // iska matlb ye code screen ki maximum width 600px hone
+  //tak kam karega
+  // agar screen width 600px se jyada hui te code kam nai karega
+  // }
+  // @media (min-width: 600px) {
+  // (min-width: 600px)
+  // code runs until minimum width is 600px
+  // iska matlb ye code screen ki width minimum 600px hone tak
+  // kam karega
+  // agar screen width 600px se kam hui to ye code kam nahi karega
+  // }
+
+  @include respond(tab-land) {
+    // for tablet landscape screen i want 1rem to be 9px so i have to divide 9px by 16px because 1 rem = 16px 9/16 => fontsize 56.25%
+
+    font-size: 56.25%;
+  }
+  @include respond(tab-port) {
+    // for tablet portrait screen i want 1rem to be 8px so i have to divide 8px by 16px because 1 rem = 16px 8/16 => fontsize 50%
+    font-size: 50%;
+  }
+
+  @include respond(bid-desktop) {
+    // i want 1rem = 12px so 12/16 = 75%
+    font-size: 70%;
+  }
+}
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+
+  ::selection {
+    background-color: $color-primary;
+  }
+}

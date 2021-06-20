@@ -1,0 +1,88 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//media queries
+/*
+0 - 600px:      phone
+600 - 900px:    tablet portrail
+900 - 1200px:   tablet landscape
+1200 - 1800px:  desktop where normal style applies if using desktop first approach
+1800 + ... :    big desktop
+*/
+
+// example of writing mixin with specified device width
+// and then passing content after including it in scss styling
+// no semicolon ; after @content
+/*
+@mixin respond-phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+*/
+// now we can include this mixin in element's styling and then
+// // writing what code to apply here ex. for story class in section-story
+// .story{
+//   @include respond-phone{
+//     width:50%;..... etc. etc.
+//   }
+// }
+
+/*
+
+$breakpoint argument choices
+- phone
+- tab-port (tablet portrait)
+- tab-land (tablet landscape)
+- big-desktop 
+
+pass argument like 
+
+$include respond(phone0{ .............. }
+we use em instead of rem in media queries bcuz rem doesn't work effectively in media queries
+1em = 16px;
+
+order for doing responsive design in this page
+
+base + typography > general layout + grid > page layout > components 
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      //1em = 16px so 600px 600/16 = 37.5em
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media (max-width: 74em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    // min-width bcuz we want media queries to apply when screensize is equal or more than 1800
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
